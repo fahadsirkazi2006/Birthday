@@ -1,0 +1,464 @@
+/* ========== CUTE & MODERN STYLESHEET ========== */
+
+/* Tip: To use a cute handwriting or display font, add this inside the <head> tag of your HTML:
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif; 
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* ========== SPECIAL CONFETTI ========== */
+#specialConfettiContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3000;
+    overflow: hidden;
+}
+.special-confetti {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ffcf40; /* Golden color */
+    border-radius: 50%;
+    transition: top 1.5s ease-in, left 1.5s ease-out; /* Animation timing */
+}
+
+/* ========== SECTION STYLES ========== */
+.section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.section.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ========== OPENING ANIMATION SECTION ========== */
+.opening-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInGlow 3s ease-in-out forwards;
+}
+
+@keyframes fadeInGlow {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* ========== NAME REVEAL SECTION ========== */
+.birthday-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.name-reveal {
+    font-family: 'Pacifico', cursive;
+    font-size: 6rem;
+    font-weight: bold;
+    color: #ff8a80;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff8a80, 0 0 30px #ff8a80;
+    margin: 20px 0;
+}
+
+.letter-span {
+    display: inline-block;
+    opacity: 0;
+    animation: letterReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes letterReveal {
+    0% { opacity: 0; transform: translateY(-50px) scale(0.5); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ========== BUTTONS & HINTS ========== */
+.begin-btn {
+    background: linear-gradient(45deg, #ff8a80, #ffcf40);
+    border: none;
+    padding: 18px 35px;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    position: relative;
+    z-index: 1000;
+}
+
+.begin-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.nav-hint {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    animation: hintGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes hintGlow {
+    from { opacity: 0.9; }
+    to { opacity: 1; }
+}
+
+/* ========== CONFETTI & BALLOONS ========== */
+.confetti {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: confetti-fall 4s linear infinite;
+    z-index: 1000;
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); }
+}
+
+.balloon {
+    position: fixed;
+    bottom: -150px;
+    width: 60px;
+    height: 75px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: balloon-float 10s ease-in-out infinite;
+    z-index: 999;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.5s ease;
+    box-shadow: inset -10px -10px 0 rgba(0,0,0,0.07);
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.balloon.popped {
+    animation: balloonPop 0.4s ease-out forwards;
+}
+
+@keyframes balloon-float {
+    to { transform: translateY(-120vh) translateX(20vw) rotateZ(15deg); }
+}
+
+@keyframes balloonPop {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ========== BIRTHDAY MESSAGE ========== */
+.birthday-message {
+    max-width: 600px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.8;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.message-line {
+    opacity: 0;
+    animation: fadeInLine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    margin: 10px 0;
+}
+
+.message-line:first-child {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #ffcf40;
+}
+
+@keyframes fadeInLine {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== WISH STAR ========== */
+.wish-star {
+    font-size: 4rem;
+    color: #ffcf40;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: starTwinkle 2s ease-in-out infinite;
+    text-shadow: 0 0 20px #ffcf40;
+    margin-top: 20px;
+}
+
+.wish-star:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.wish-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.wish-input {
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 2px solid #ffcf40;
+    background: rgba(255, 255, 255, 0.9);
+    width: 280px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.wish-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px #ffcf40;
+}
+
+.wish-btn {
+    background: linear-gradient(45deg, #ffcf40, #ff8a80);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.wish-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.wish-success {
+    color: #fff;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.wish-success.show {
+    opacity: 1;
+}
+
+/* ========== SECRET LETTER ========== */
+.envelope {
+    font-size: 5rem;
+    color: #ff8a80;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.envelope:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.letter {
+    max-width: 500px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    transform: scale(0.8) rotateX(-90deg);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: none;
+}
+
+.letter.open {
+    transform: scale(1) rotateX(0);
+    opacity: 1;
+    display: block;
+}
+
+/* ========== FIREWORKS FINALE ========== */
+.fireworks-bg {
+    background: #1d2b53;
+}
+
+.fireworks-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 4.5rem;
+    color: #ff8a80;
+    text-shadow: 0 0 15px #fff, 0 0 25px #ff8a80, 0 0 40px #ff8a80;
+    z-index: 100;
+    position: relative;
+    animation: finalGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes finalGlow {
+    from { text-shadow: 0 0 15px #fff, 0 0 25px #ff8a80; }
+    to { text-shadow: 0 0 25px #fff, 0 0 40px #ff8a80, 0 0 60px #ff8a80; }
+}
+
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    opacity: 1;
+    animation: firework-explode 1s ease-out forwards;
+}
+
+@keyframes firework-explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(25); opacity: 0; }
+}
+
+.shooting-star {
+    position: fixed;
+    font-size: 2.5rem;
+    color: #ffcf40;
+    text-shadow: 0 0 15px #ffcf40;
+    z-index: 1001;
+    pointer-events: none;
+    animation: shootingStar 1.5s ease-in forwards;
+}
+
+@keyframes shootingStar {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) translateX(300px) scale(0); opacity: 0; }
+}
+
+/* ========== KITTY MASCOT ========== */
+.kitty-mascot {
+    position: fixed;
+    bottom: 20px;
+    left: -1800px; /* Start off-screen */
+    z-index: 2000;
+    cursor: pointer;
+    transition: transform 0.3s ease-out;
+    display: none;
+}
+
+.kitty-mascot.visible {
+    display: block;
+}
+
+/* NEW: Animation for the kitty peeking in */
+.kitty-mascot.peek-in {
+    animation: peek-in-animation 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes peek-in-animation {
+    0% { left: -150px; }
+    60% { left: 12vw; } /* Overshoot a little */
+    100% { left: 15vw; } /* Settle back to final position */
+}
+
+.kitty-gif {
+    width: 120px;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease-out;
+    transform-origin: bottom center;
+}
+.kitty-mascot:hover .kitty-gif {
+    transform: translateY(-5px) scale(1.05);
+}
+
+.kitty-bubble {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease, top 0.3s ease;
+    pointer-events: none;
+    z-index: 2001;
+}
+.kitty-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    z-index: -1;
+}
+.kitty-bubble.show {
+    opacity: 1;
+    top: -85px;
+}
+
+
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 768px) {
+    .opening-text { font-size: 2.2rem; }
+    .name-reveal { font-size: 4rem; }
+    .birthday-message { font-size: 1.2rem; }
+    .fireworks-title { font-size: 3rem; }
+    .wish-input { width: 80%; margin-bottom: 10px; }
+    .kitty-gif { width: 100px; }
+}
