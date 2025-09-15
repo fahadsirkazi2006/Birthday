@@ -392,7 +392,7 @@ body {
     animation: peek-in-animation 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 @keyframes peek-in-animation {
-    0% { left: -150px; }
+    0% { left: -200px; }
     60% { left: 12vw; } /* Overshoot a little */
     100% { left: 10vw; } /* Settle back to final position */
 }

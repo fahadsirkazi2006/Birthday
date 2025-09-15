@@ -256,7 +256,7 @@ function dropSpecialConfetti() {
         // After confetti reaches kitty, make kitty react and remove confetti
         setTimeout(() => {
             kittyReaction('excited');
-            updateKittyHint(-1, false, "Happy Birthday!!!! 🥳");
+            updateKittyHint(-1, false, "Meow, Happy Birthday ifra!🥳");
             confetti.remove();
         }, 1500); // Must match the CSS transition duration
     }, 100);
